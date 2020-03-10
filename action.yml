@@ -1,5 +1,9 @@
 name: 'Setup timezone'
 description: 'Setup timezone for action'
+author: 'zcong1993'
+branding:
+  icon: 'bar-chart-2'
+  color: 'green'
 inputs:
   timezone:
     description: 'which timezone you want to use'
