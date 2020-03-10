@@ -1,13 +1,10 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'Setup timezone'
+description: 'Setup timezone for action'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  timezone:
+    description: 'which timezone you want to use'
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps 
-    description: 'The message to output'
+    default: 'UTC'
 runs:
   using: 'node12'
   main: 'dist/index.js'

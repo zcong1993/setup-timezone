@@ -1,18 +1,15 @@
 const core = require('@actions/core');
-const wait = require('./wait');
+const execa = require('execa');
 
+const runCommand = (...args) => execa(...args).stdout.pipe(process.stdout)
 
-// most @actions toolkit packages have async methods
 async function run() {
+  if (process.platform !== 'linux') {
+    core.setFailed('only support linux now')
+  }
   try { 
-    const ms = core.getInput('milliseconds');
-    console.log(`Waiting ${ms} milliseconds ...`)
-
-    core.debug((new Date()).toTimeString())
-    await wait(parseInt(ms));
-    core.debug((new Date()).toTimeString())
-
-    core.setOutput('time', new Date().toTimeString());
+    const timezone = core.getInput('timezone');
+    await runCommand('sudo', ['timedatectl', 'set-timezone', timezone])
   } 
   catch (error) {
     core.setFailed(error.message);
